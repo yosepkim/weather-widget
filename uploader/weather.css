@@ -1,0 +1,166 @@
+.featured-locations__locations {
+    font-family: Solis, Arial, Helvetica, sans-serif !important;
+    --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    color: #000;
+    letter-spacing: normal;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    vertical-align: baseline;
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+    position: relative;
+    transition: transform .25s ease-in-out,-webkit-transform .25s ease-in-out;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding: 0;
+}
+
+.widget-white .recent-location-item {
+    background: #ffffff;
+}
+
+.recent-location-item {
+     --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    vertical-align: baseline;
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,.25);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-between;
+    padding: 8px 12px;
+    text-decoration: none;
+    min-width: auto;
+    opacity: 1;
+    transition: opacity .5s;
+    margin-right: 0;
+}
+.recent-locaton-name-wrapper {
+        --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    display: flex;
+ }
+.recent-location-name {
+    --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.29;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 28vw;
+}
+.recent-location-admin-name {
+        --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    display: none;
+    font-size: 12px;
+    line-height: 1.33;
+    overflow: hidden;
+    padding-bottom: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+.recent-location-current-weather-wrapper {
+        --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+}
+.recent-location-current-weather-wrappe img {
+        --bg: #1f1f1f;
+    --header-bg: #1f1f1f;
+    --header-bg-top: #1f1f1f;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal;
+    -webkit-box-direction: normal;
+    color: #fff;
+    cursor: pointer;
+    aspect-ratio: auto 32 / 32;
+    border: 0;
+    box-sizing: border-box;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    filter: brightness(0) invert(1);
+    height: 32px;
+    margin-right: 12px;
+    width: 32px; 
+}

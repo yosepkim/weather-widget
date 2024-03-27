@@ -1,0 +1,114 @@
+trigger:
+- main
+
+pool:
+  name: linode
+
+variables:
+- name: node_version
+  value: '18.x'
+- name: EW_ID
+  value: '80521'
+- name: account_key
+  value: '1-5BYUG1'
+
+stages:
+- stage: test
+  displayName: 'Build'
+  jobs:
+  - job: build_test
+    displayName: 'Build and test'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: ${{ variables.node_version }}
+      displayName: 'Install Node.js'
+    - script: |
+        npm install
+        node --experimental-vm-modules node_modules/.bin/jest
+      displayName: 'npm install, run Jest tests'
+
+- stage: upload
+  displayName: 'Upload'
+  dependsOn: test
+  jobs:
+  - job: upload
+    displayName: 'Upload'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: ${{ variables.node_version }}
+      displayName: 'Install node js'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/install-akamai-cli.sh'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/upload.sh'
+      env:
+        EW_ID: ${{ variables.EW_ID }}
+        ACCOUNT_KEY: ${{ variables.account_key }}
+        AKAMAI_HOST: $(AKAMAI_HOST)
+        AKAMAI_CLIENT_TOKEN: $(AKAMAI_CLIENT_TOKEN)
+        AKAMAI_ACCESS_TOKEN: $(AKAMAI_ACCESS_TOKEN)
+        AKAMAI_CLIENT_SECRET: $(AKAMAI_CLIENT_SECRET)
+        AKAMAI_EDGE_TOKEN: $(AKAMAI_EDGE_TOKEN)
+      
+
+- stage: staging
+  displayName: 'Activate Staging'
+  dependsOn: upload
+  jobs:
+  - job: activateStaging
+    displayName: 'Activate staging'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: ${{ variables.node_version }}
+      displayName: 'Install node js'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/install-akamai-cli.sh'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/activate.sh'
+      env:
+        TARGET_ENV: 'staging'
+        EW_ID: ${{ variables.EW_ID }}
+        ACCOUNT_KEY: ${{ variables.account_key }}
+        AKAMAI_HOST: $(AKAMAI_HOST)
+        AKAMAI_CLIENT_TOKEN: $(AKAMAI_CLIENT_TOKEN)
+        AKAMAI_ACCESS_TOKEN: $(AKAMAI_ACCESS_TOKEN)
+        AKAMAI_CLIENT_SECRET: $(AKAMAI_CLIENT_SECRET)
+
+- stage: production
+  displayName: 'Activate Production'
+  dependsOn: staging
+  jobs:
+  - job: activateProduction
+    displayName: 'Activate production'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: ${{ variables.node_version }}
+      displayName: 'Install node js'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/install-akamai-cli.sh'
+    - task: Bash@3
+      inputs:
+        targetType: 'filePath'
+        filepath: '$(System.DefaultWorkingDirectory)/azure-pipeline/activate.sh'
+      env:
+        TARGET_ENV: 'production'
+        EW_ID: ${{ variables.EW_ID }}
+        ACCOUNT_KEY: ${{ variables.account_key }}
+        AKAMAI_HOST: $(AKAMAI_HOST)
+        AKAMAI_CLIENT_TOKEN: $(AKAMAI_CLIENT_TOKEN)
+        AKAMAI_ACCESS_TOKEN: $(AKAMAI_ACCESS_TOKEN)
+        AKAMAI_CLIENT_SECRET: $(AKAMAI_CLIENT_SECRET)
