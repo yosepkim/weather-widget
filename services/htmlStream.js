@@ -46,11 +46,20 @@ export class HTMLStream {
             const url = 'https://harperdb.edgecloud9.com/weather-widget/?key=' + key;
             const options = {
               method: 'GET',
-              headers: { 'Authorization': 'Basic {base64-encoded-username-colon-password}', 'Content-Type': 'application/json'},
+              headers: { 'Authorization': 'Basic {token}', 'Content-Type': 'application/json'},
             };
             const response = await httpRequest(url, options);
             const widgetJson = await response.json();
             widget = widgetJson[0].value;
+          } else if (dbType === 'mm') {
+            const url = 'https://macrometa.edgecloud9.com/_fabric/_system/_api/kv/weather-widget/value/' + key;
+            const options = {
+              method: 'GET',
+              headers: { 'Authorization': 'apikey {key}', 'Content-Type': 'application/json'},
+            };
+            const response = await httpRequest(url, options);
+            const widgetJson = await response.json();
+            widget = widgetJson.value;
           } else {
             widget = await database.getByKey(key);
           }

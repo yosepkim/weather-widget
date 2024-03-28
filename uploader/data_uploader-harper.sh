@@ -39,8 +39,8 @@ do
        -e 's/\r\n/ /g' sample.html`
 
 
-   echo '{ "key": "'${locationKey}'-f", "value": "'${f_value}'" }, ' >> output.txt; 
-   echo '{ "key": "'${locationKey}'-c", "value":"'${c_value}'" }, ' >> output.txt; 
+   echo '{ "_key": "'${locationKey}'-f", "value": "'${f_value}'", "groupID": "widget", "expireAt": -1 }, ' >> output.txt; 
+   echo '{ "_key": "'${locationKey}'-c", "value": "'${c_value}'", "groupID": "widget", "expireAt": -1 }, ' >> output.txt; 
 
    locationKey=$((locationKey+1))
 done < <(cut -d "," -f1,3,4,5 s_uscities.csv | tail -n +2)
